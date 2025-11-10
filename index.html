@@ -106,8 +106,8 @@
 
     function updateTaskCount() { return taskList.querySelectorAll("li").length; }
 
-    function playCongrats() { new Audio("/static/congrats.mp3").play(); }
-    function playMultipleTasksSound() { new Audio("/static/multi_tasks.mp3").play(); }
+    function playCongrats() { new Audio("congrats.mp3").play(); }
+    function playMultipleTasksSound() { new Audio("multi_tasks.mp3").play(); }
 
     function handleTaskCompletion(li) {
       li.remove();
@@ -154,14 +154,14 @@
           const message = li.textContent.replace(/–.*/, "").trim();
           new Notification("⏰ Task Reminder", { body: message });
 
-          const initialAudio = new Audio("/static/alert.mp3");
+          const initialAudio = new Audio("alert.mp3");
           initialAudio.play();
 
           initialAudio.onended = () => {
             const speech = new SpeechSynthesisUtterance(`You should finish the task: ${message}, now!`);
             speech.rate = 1; speech.pitch = 1;
             speech.onend = () => {
-              const finalAudio = new Audio("/static/end_alert.mp3");
+              const finalAudio = new Audio("end_alert.mp3");
               finalAudio.play();
 
               setTimeout(() => {
